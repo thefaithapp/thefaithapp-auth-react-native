@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.1 - 2026-10-24
 
 - Use patched Zod and esbuild tooling; verify a source-pinned node-forge security backport before accepting its remaining registry advisory.
 
