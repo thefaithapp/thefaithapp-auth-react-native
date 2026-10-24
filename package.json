@@ -26,15 +26,19 @@
     "dist",
     "app.plugin.js",
     "README.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "scripts": {
     "build": "tsup",
     "clean": "rimraf dist coverage",
-    "test": "vitest run",
+    "test": "vitest run && npm run test:security",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
-    "prepack": "npm run clean && npm run build && npm run test"
+    "prepack": "npm run security:check && npm run clean && npm run build && npm run test",
+    "security:prepare": "node scripts/security-check.cjs --prepare-only",
+    "security:check": "node scripts/security-check.cjs",
+    "test:security": "node --test scripts/security-check.test.cjs"
   },
   "peerDependencies": {
     "@expo/config-plugins": ">=57.0.0 <58.0.0",
@@ -57,7 +61,7 @@
     "react": "^19.2.0",
     "react-native": "^0.86.0",
     "rimraf": "^6.1.2",
-    "tsup": "^8.5.1",
+    "tsup": "^9.0.0",
     "typescript": "^5.9.3",
     "vitest": "^4.1.10"
   },
@@ -74,5 +78,8 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "overrides": {
+    "zod": "^4.6.7"
   }
 }

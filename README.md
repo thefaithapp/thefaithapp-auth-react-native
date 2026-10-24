@@ -73,6 +73,41 @@ await auth.signOut()
 
 See the example app in the repository for a complete integration.
 
+## Local SDK development
+
+When building this package from source for an isolated development app, set
+both origins at build time:
+
+```bash
+npm run build -- \
+  --env.TFA_API_BASE_URL http://127.0.0.1:8000 \
+  --env.TFA_HOSTED_AUTH_BASE_URL http://127.0.0.1:3001
+```
+
+Origins must use HTTPS, except HTTP on loopback, and cannot contain credentials,
+paths, queries, or fragments. Register the development app's callback and use
+its test church's client key. Build without these overrides for production.
+
 ## License
 
 TheFaithApp Auth is available under the [MIT License](LICENSE).
+
+## Development dependency security
+
+Use Node 22 LTS (22.18+) or Node 24 LTS (24.11+) for source builds.
+When building from a source checkout, run `npm ci --ignore-scripts`, then
+`npm run security:prepare` before using Expo tooling. Run `npm run security:check`
+for the complete dependency audit. `npm test` also tests the audit policy.
+
+Zod and esbuild use patched versions. Until node-forge publishes its fix for
+CVE-2026-85393, the development script backports the nested DigestAlgorithm
+validation from [upstream PR 1152](https://github.com/digitalbazaar/forge/pull/1152).
+It checks the original source hash, verifies the patched file, and tests valid
+and malformed RSA signatures. The audit accepts only that exact advisory for
+copies that passed these checks; new advisories and modified files still fail.
+Raw `npm audit` continues to report the unchanged upstream node-forge version.
+
+This development helper is excluded from the published SDK archive. It does
+not run an install hook in consumer apps. Consumer app maintainers must apply
+their own dependency updates and tooling fixes; the giving example includes the
+same checks.
