@@ -1,6 +1,6 @@
 {
   "name": "@thefaithapp/auth-react-native",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Hosted member authentication and authorized v1 API access for React Native and Expo apps.",
   "license": "MIT",
   "homepage": "https://thefaithapp.com",
