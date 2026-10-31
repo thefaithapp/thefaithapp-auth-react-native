@@ -5,6 +5,12 @@ returns a member bearer token for the `v1` API. It handles callback setup, S256
 PKCE, state validation, code exchange, secure session storage, authenticated
 API requests, and logout.
 
+## Documentation
+
+- [React Native SDK quickstart](https://docs.thefaithapp.com/api-reference/react-native-sdk)
+- [Hosted authentication guide](https://docs.thefaithapp.com/api-reference/hosted-auth)
+- [Standalone example app](https://github.com/thefaithapp/thefaithapp-auth-react-native/tree/main/example)
+
 ## Install
 
 ```bash
